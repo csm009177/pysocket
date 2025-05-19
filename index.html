@@ -3,9 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simple Chat</title>
 </head>
 <body>
-    test
+    <h2>Simple Chat</h2>
+    
+    <!-- 채팅 메시지 표시 영역 -->
+    <div id="chatBox" style="border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px;">
+        <!-- 메시지들이 여기에 추가됨 -->
+    </div>
+
+    <!-- 입력창과 전송 버튼 -->
+    <input type="text" id="messageInput" placeholder="메시지를 입력하세요" style="width: 70%;">
+    <button onclick="sendMessage()">전송</button>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById("messageInput");
+            const message = input.value.trim();
+            if (message === "") return;
+
+            const chatBox = document.getElementById("chatBox");
+
+            // 메시지를 채팅 박스에 추가
+            const messageElement = document.createElement("div");
+            messageElement.textContent = message;
+            chatBox.appendChild(messageElement);
+
+            // 스크롤 맨 아래로
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // 입력창 비우기
+            input.value = "";
+        }
+
+        // 엔터키로도 전송되도록 설정
+        document.getElementById("messageInput").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
 </body>
 </html>
